@@ -16,10 +16,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const navbar = document.querySelector('.navbar');
 window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
-        navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
-        navbar.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
+        navbar.style.backgroundColor = 'var(--bg-color)';
+        navbar.style.backdropFilter = 'blur(10px)';
+        navbar.style.boxShadow = '0 2px 5px var(--shadow-color)';
     } else {
-        navbar.style.backgroundColor = 'var(--white)';
+        navbar.style.backgroundColor = 'transparent';
+        navbar.style.backdropFilter = 'none';
         navbar.style.boxShadow = 'none';
     }
 });
@@ -226,17 +228,17 @@ document.addEventListener('DOMContentLoaded', function() {
     if (localStorage.getItem('theme') === 'dark' || 
         (window.matchMedia('(prefers-color-scheme: dark)').matches && 
          !localStorage.getItem('theme'))) {
-        document.body.classList.add('dark-theme');
+        document.documentElement.setAttribute('data-theme', 'dark');
         themeSwitch.checked = true;
     }
     
     // Listen for toggle changes
     themeSwitch.addEventListener('change', function() {
         if (this.checked) {
-            document.body.classList.add('dark-theme');
+            document.documentElement.setAttribute('data-theme', 'dark');
             localStorage.setItem('theme', 'dark');
         } else {
-            document.body.classList.remove('dark-theme');
+            document.documentElement.removeAttribute('data-theme');
             localStorage.setItem('theme', 'light');
         }
     });
