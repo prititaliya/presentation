@@ -174,7 +174,8 @@
                             </a>
                         </div>
                     </div>
-                    <div class="team-member">
+
+                        <div class="team-member" onclick="openModal('alanna-modal')">
                         <div class="member-image">
                             <img src="images/team/alanna.png" alt="Alanna Morris">
                         </div>
@@ -182,8 +183,8 @@
                         <p class="member-role">Software Developer</p>
                         <p class="member-bio">Computer Science student at the University of Manitoba interested in software design and development.</p>
                         <div class="member-links">
-                            <a href="https://github.com/" target="_blank" class="social-link">
-                                <i class="fab fa-github"></i>
+                            <a href="https://www.linkedin.com/in/alanna-morris/" target="_blank" class="social-link">
+                                <i class="fab fa-linkedin"></i>
                             </a>
                         </div>
                     </div>
@@ -463,6 +464,39 @@
                         <li>Created and maintained GitLab project documentation</li>
                         <li>Developed business layer logic components</li>
                         <li>Managed project version control and branching strategies</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="alanna-modal" class="member-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('alanna-modal')">&times;</span>
+            <div class="modal-header">
+                <img src="images/team/alanna.png" alt="Alanna">
+                <h2>Alanna</h2>
+                <p>Software Developer</p>
+            </div>
+            <div class="modal-body">
+                <div class="skills-section">
+                    <h3>Skills & Expertise</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Android Development</span>
+                        <span class="skill-tag">UI/UX Design</span>
+                        <span class="skill-tag">Project Organization</span>
+                        <span class="skill-tag">GitLab</span>
+                    </div>
+                </div>
+                <div class="contributions-section">
+                    <h3>Project Contributions</h3>
+                    <ul class="contribution-list">
+                        <li>Designed user journeys, created wireframes, and implemented UI</li>
+                        <li>Developed in business layer logic (services, validation, and exceptions), as well as Domain-Specific Objects (DSOs)</li>
+                        <li>Refactored code in the presentation and business layers after feedback cycles to better uphold SOLID principles</li>
+                        <li>Performed project organizational tasks using GitLab, Google Drive, and maintained project logs</li>
+                        <li>Reviewed and updated acceptance tests; added fixes for different aspect ratios</li>
                     </ul>
                 </div>
             </div>

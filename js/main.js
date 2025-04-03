@@ -415,17 +415,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 "Designed and implemented data models"
             ]
         },
-        "Alanna Morris": {
-            role: "Software Developer",
-            bio: "Computer Science student at University of Manitoba specializing in application development.",
-            skills: ["UI Design", "Frontend Development", "User Testing"],
-            contributions: [
-                "Created the user interface design",
-                "Implemented responsive layouts",
-                "Conducted user testing sessions",
-                "Developed user onboarding flow"
-            ]
-        },
         "Mahas": {
             role: "Software Developer",
             bio: "Computer Science student at University of Manitoba focused on software development.",
