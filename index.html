@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Kages - Wealth Management System</title>
-    <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+    <link rel="icon" type="image/svg+xml" href="images/logo.svg" id="favicon">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -21,7 +21,9 @@
             <a href="#features">Features</a>
             <a href="#team">Team</a>
             <a href="#demo">Demo</a>
-            <a href="#postmortem">Postmortem</a>
+            <a href="#journey">Journey</a>
+            <a href="#feature-showcase">Showcase</a>
+            <a href="#resources">Resources</a>
         </div>
     </nav>
 
@@ -129,10 +131,10 @@
                 <div class="team-grid">
                     <div class="team-member">
                         <div class="member-image">
-                            <img src="images/team/prit1.jpg" alt="Prit Italiya">
+                            <img src="images/team/prit.png" alt="Prit Italiya">
                         </div>
                         <h3>Prit Italiya</h3>
-                        <p class="member-role">Data Analyst & Software Engineer</p>
+                        <p class="member-role">Data Scientist/Analyst & Software Developer</p>
                         <p class="member-bio">Third-year Computer Science Honours student at University of Manitoba</p>
                         <div class="member-links">
                             <a href="https://github.com/prititaliya" target="_blank" class="social-link">
@@ -214,35 +216,176 @@
             </div>
         </section>
 
-        <section id="postmortem" class="section">
-            <h2>Development Journey</h2>
+        <section id="journey" class="section">
+            <div class="container">
+                <h2 class="section-title">Our Development Journey</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Iteration 0 - Documentation Phase</h3>
+                            <p class="timeline-date">January 2024</p>
+                            <div class="timeline-description">
+                                <p>Our initial iteration focused on documentation and planning, not code. We faced challenges with our vision statement and planning:</p>
+                                <ul class="feedback-list">
+                                    <li>Vision statement needed more focus and less technical details</li>
+                                    <li>Features needed better descriptive detail</li>
+                                    <li>User stories required better connection to features</li>
+                                    <li>Received guidance on improving documentation structure</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Iteration 1 - First Implementation</h3>
+                            <p class="timeline-date">February 2024</p>
+                            <div class="timeline-description">
+                                <p>Our first coding iteration revealed areas for improvement:</p>
+                                <ul class="feedback-list">
+                                    <li>Successfully implemented login/account management with proper error handling</li>
+                                    <li>Needed refactoring for better object structure and code organization</li>
+                                    <li>Identified issues with data validation and layer separation</li>
+                                    <li>Achieved good test coverage but needed more meaningful tests</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item highlight">
+                        <div class="timeline-content">
+                            <h3>Iteration 2 - Major Improvements</h3>
+                            <p class="timeline-date">March 2024</p>
+                            <div class="timeline-description">
+                                <p>Made significant strides in code quality and functionality:</p>
+                                <ul class="feedback-list">
+                                    <li>Created a "beautiful diagram" for system architecture</li>
+                                    <li>Achieved strong data persistence</li>
+                                    <li>All components became fully functional</li>
+                                    <li>Professor's praise: "You did it! You cleaned it all up! It looks so much better! [...] look how far you've come this term! this is huge!"</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Iteration 3 - Final Phase</h3>
+                            <p class="timeline-date">April 2024</p>
+                            <div class="timeline-description">
+                                <p>Currently in progress, aiming to maintain the momentum from Iteration 2's success. Our focus is on polishing the application and ensuring all components work seamlessly together.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="feature-showcase" class="section">
+            <h2>Interactive Feature Showcase</h2>
             <div class="content">
-                <div class="postmortem-grid">
-                    <div class="postmortem-card">
-                        <h3>What Went Right</h3>
+                <p class="section-intro">Experience the key features of our WealthWise application through this interactive showcase. See how the app helps users manage their finances effectively.</p>
+                
+                <div class="feature-demo">
+                    <div class="demo-tabs">
+                        <div class="demo-tab active" data-tab="income-tracking">Income Tracking</div>
+                        <div class="demo-tab" data-tab="expense-tracking">Expense Tracking</div>
+                        <div class="demo-tab" data-tab="analytics">Analytics</div>
+                        <div class="demo-tab" data-tab="budgeting">Budgeting</div>
+                    </div>
+                    
+                    <div class="demo-content active" id="income-tracking">
+                        <h3>Income Tracking</h3>
+                        <p>WealthWise makes it easy to record and categorize your income sources. Set up recurring income entries for regular paychecks or add one-time deposits when they occur.</p>
+                        <div class="demo-image">
+                            <img src="images/demo-income.png" alt="Income Tracking Demo">
+                        </div>
+                        <div class="demo-features">
+                            <ul>
+                                <li>Multiple income categories</li>
+                                <li>Recurring income tracking</li>
+                                <li>Income history visualization</li>
+                                <li>Tax category assignment</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="demo-content" id="expense-tracking">
+                        <h3>Expense Tracking</h3>
+                        <p>Track all your expenses with detailed categorization. Easily add expenses on the go and see where your money is going at a glance.</p>
+                        <div class="demo-image">
+                            <img src="images/demo-expenses.png" alt="Expense Tracking Demo">
+                        </div>
+                        <div class="demo-features">
+                            <ul>
+                                <li>Multiple expense categories</li>
+                                <li>Recurring expense setup</li>
+                                <li>Receipt photo storage</li>
+                                <li>Location-based expense tracking</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="demo-content" id="analytics">
+                        <h3>Financial Analytics</h3>
+                        <p>Gain insights into your financial habits with comprehensive analytics. Visualize spending patterns and identify areas for improvement.</p>
+                        <div class="demo-image">
+                            <img src="images/demo-analytics.png" alt="Analytics Demo">
+                        </div>
+                        <div class="demo-features">
+                            <ul>
+                                <li>Spending breakdown by category</li>
+                                <li>Monthly/yearly comparison</li>
+                                <li>Income vs. expense analysis</li>
+                                <li>Trend visualization</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="demo-content" id="budgeting">
+                        <h3>Budget Planning</h3>
+                        <p>Set financial goals and track your progress with our budgeting tools. Create category-specific budgets and get alerts when you're approaching limits.</p>
+                        <div class="demo-image">
+                            <img src="images/demo-budget.png" alt="Budgeting Demo">
+                        </div>
+                        <div class="demo-features">
+                            <ul>
+                                <li>Custom budget creation</li>
+                                <li>Budget vs. actual comparison</li>
+                                <li>Goal setting and tracking</li>
+                                <li>Budget alerts and notifications</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="resources" class="section">
+            <h2>Project Documentation</h2>
+            <div class="content">
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <i class="fas fa-book"></i>
+                        <h3>Project Planning</h3>
                         <ul>
-                            <li>Successful implementation of core financial features</li>
-                            <li>Effective team collaboration through regular meetings</li>
-                            <li>Good use of Android development practices</li>
-                            <li>Well-organized documentation and tracking</li>
+                            <li><a href="markdown-viewer.html?file=Documents/Iteration0/Iteration0DRAFT.md" target="_blank">Initial Project Plan</a></li>
+                            <li><a href="markdown-viewer.html?file=Documents/Iteration0/branchStrat.md" target="_blank">Branch Strategy</a></li>
                         </ul>
                     </div>
-                    <div class="postmortem-card">
-                        <h3>Challenges Faced</h3>
+                    <div class="resource-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Project Progress</h3>
                         <ul>
-                            <li>Complex financial data management</li>
-                            <li>Database integration challenges</li>
-                            <li>Time management during iterations</li>
-                            <li>Coordinating team schedules for meetings</li>
+                            <li><a href="image-viewer.html?file=Documents/Iteration3/velocity_chart.png" target="_blank">Project Velocity Chart</a></li>
+                            <li><a href="markdown-viewer.html?file=Documents/Iteration3/it3-retrospective.md" target="_blank">Final Project Retrospective</a></li>
                         </ul>
                     </div>
-                    <div class="postmortem-card">
-                        <h3>Lessons Learned</h3>
+                    <div class="resource-card">
+                        <i class="fas fa-sitemap"></i>
+                        <h3>Architecture</h3>
                         <ul>
-                            <li>Importance of early architecture decisions</li>
-                            <li>Value of regular team communication</li>
-                            <li>Need for better time estimation</li>
-                            <li>Benefits of iterative development</li>
+                            <li><a href="pdf-viewer.html?pdf=Documents/Iteration3/arch_diagram_it3.pdf" target="_blank">System Architecture Diagram</a></li>
                         </ul>
                     </div>
                 </div>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation Viewer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/viz.js@3.1.0/viz.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/viz.js@3.1.0/full.render.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: #0d1117;
+            line-height: 1.6;
+            color: #c9d1d9;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #161b22;
+            padding: 60px;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+        }
+        .markdown-body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.8;
+            word-wrap: break-word;
+            color: #c9d1d9;
+            background-color: #161b22;
+        }
+        .markdown-body h1 {
+            font-size: 2.4em;
+            margin-bottom: 1em;
+            color: #ffffff;
+            border-bottom: 2px solid #30363d;
+            padding-bottom: 0.5em;
+        }
+        .markdown-body h2 {
+            font-size: 1.8em;
+            margin-top: 2em;
+            margin-bottom: 1em;
+            color: #ffffff;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 0.3em;
+        }
+        .markdown-body h3 {
+            font-size: 1.4em;
+            margin-top: 1.5em;
+            color: #ffffff;
+        }
+        .markdown-body p {
+            margin: 1em 0;
+            line-height: 1.8;
+            color: #c9d1d9;
+        }
+        .markdown-body pre {
+            background-color: #0d1117;
+            border-radius: 8px;
+            padding: 20px;
+            overflow: auto;
+            margin: 1.5em 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .markdown-body code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            font-size: 14px;
+            padding: 0.2em 0.4em;
+            background-color: rgba(110, 118, 129, 0.1);
+            border-radius: 3px;
+            color: #c9d1d9;
+        }
+        .markdown-body pre code {
+            padding: 0;
+            background-color: transparent;
+            color: #c9d1d9;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .markdown-body blockquote {
+            padding: 1em 2em;
+            color: #8b949e;
+            border-left: 4px solid #1f6feb;
+            background-color: rgba(110, 118, 129, 0.1);
+            margin: 1.5em 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .markdown-body ul,
+        .markdown-body ol {
+            padding-left: 2em;
+            margin: 1em 0;
+            color: #c9d1d9;
+        }
+        .markdown-body li {
+            margin: 0.5em 0;
+        }
+        .markdown-body table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            width: 100%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .markdown-body table th {
+            background-color: #161b22;
+            font-weight: 600;
+            color: #ffffff;
+        }
+        .markdown-body table th,
+        .markdown-body table td {
+            padding: 12px 16px;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+        }
+        .markdown-body table tr:nth-child(2n) {
+            background-color: #1c2128;
+        }
+        .markdown-body img {
+            max-width: 100%;
+            box-sizing: border-box;
+            background-color: #0d1117;
+            border-radius: 6px;
+            margin: 1.5em 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        .markdown-body hr {
+            height: 2px;
+            background-color: #30363d;
+            border: none;
+            margin: 2em 0;
+        }
+        .markdown-body a {
+            color: #58a6ff;
+            text-decoration: none;
+        }
+        .markdown-body a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 767px) {
+            body {
+                padding: 20px;
+            }
+            .container {
+                padding: 30px;
+            }
+        }
+        .pdf-viewer {
+            width: 100%;
+            height: 800px;
+            border: none;
+        }
+        .graph-container {
+            background: white;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        .graph-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Custom styles for the architecture diagram */
+        pre code.language-graph {
+            color: #e6e6e6;
+        }
+        .graph-keyword { color: #569cd6; }
+        .graph-string { color: #ce9178; }
+        .graph-comment { color: #6a9955; }
+        .graph-attribute { color: #9cdcfe; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="content" class="markdown-body"></div>
+    </div>
+
+    <script>
+        marked.setOptions({
+            highlight: function(code, lang) {
+                if (lang === 'graph' || lang === 'dot') {
+                    // For graph/dot code blocks, try to render with Viz.js
+                    try {
+                        const viz = new Viz();
+                        return viz.renderString(code)
+                            .then(result => result)
+                            .catch(error => {
+                                console.error(error);
+                                return hljs.highlightAuto(code).value;
+                            });
+                    } catch (error) {
+                        console.error(error);
+                        return hljs.highlightAuto(code).value;
+                    }
+                }
+                // For other code blocks, use highlight.js
+                if (lang && hljs.getLanguage(lang)) {
+                    return hljs.highlight(code, { language: lang }).value;
+                }
+                return hljs.highlightAuto(code).value;
+            },
+            breaks: true,
+            gfm: true,
+            pedantic: false,
+            smartLists: true,
+            smartypants: true
+        });
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const filePath = urlParams.get('file');
+
+        if (filePath) {
+            fetch(filePath)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(text => {
+                    document.getElementById('content').innerHTML = marked.parse(text);
+                    document.querySelectorAll('pre code').forEach((block) => {
+                        hljs.highlightBlock(block);
+                    });
+                })
+                .catch(error => {
+                    document.getElementById('content').innerHTML = `
+                        <div style="color: #f85149; background-color: rgba(248,81,73,0.1); padding: 16px; border-radius: 6px; border: 1px solid rgba(248,81,73,0.2);">
+                            <h3 style="margin-top: 0; color: #f85149;">Error Loading Document</h3>
+                            <p style="color: #c9d1d9;">${error.message}</p>
+                        </div>
+                    `;
+                });
+        } else {
+            document.getElementById('content').innerHTML = '<p>No file specified</p>';
+        }
+    </script>
+</body>
+</html> 

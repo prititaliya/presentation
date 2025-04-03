@@ -78,4 +78,453 @@ window.addEventListener('resize', () => {
         }
         document.querySelector('.nav-links').classList.remove('show');
     }
+});
+
+// Navigation highlighting
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all sections
+    const sections = document.querySelectorAll('section, header.hero');
+    // Get all navigation links
+    const navLinks = document.querySelectorAll('.nav-links a');
+    
+    // Add smooth scrolling to nav links
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Get the target section
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            // Scroll smoothly to the section
+            targetSection.scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+    
+    // Highlight active section when scrolling
+    window.addEventListener('scroll', function() {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            // 300px offset for better UX
+            if (pageYOffset >= (sectionTop - 300)) {
+                current = section.getAttribute('id') || 'hero';
+            }
+        });
+        
+        // Update active link
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            } else if (current === 'hero' && link.getAttribute('href') === '#overview') {
+                // Special case for the hero section
+                link.classList.add('active');
+            }
+        });
+    });
+    
+    // Mobile navigation toggle
+    const navBrand = document.querySelector('.nav-brand');
+    const navLinksContainer = document.querySelector('.nav-links');
+    
+    navBrand.addEventListener('click', function() {
+        if (window.innerWidth <= 768) {
+            navLinksContainer.classList.toggle('show-mobile-nav');
+        }
+    });
+});
+
+// Add favicon animation
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the favicon element
+    const favicon = document.getElementById('favicon');
+    const faviconHref = favicon.href;
+    
+    // Create animated SVG version
+    function createAnimatedFavicon() {
+        // Fetch the original SVG content
+        fetch(faviconHref)
+            .then(response => response.text())
+            .then(svgContent => {
+                // Parse SVG content
+                const parser = new DOMParser();
+                const svgDoc = parser.parseFromString(svgContent, 'image/svg+xml');
+                const svgRoot = svgDoc.documentElement;
+                
+                // Add animation class
+                svgRoot.setAttribute('class', 'favicon-spin');
+                
+                // Add animation style if not already in CSS
+                const style = document.createElement('style');
+                style.textContent = '@keyframes favicon-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }' +
+                                  '.favicon-spin { animation: favicon-spin 1s linear infinite; }';
+                svgRoot.appendChild(style);
+                
+                // Convert back to string
+                const serializer = new XMLSerializer();
+                const animatedSvg = serializer.serializeToString(svgDoc);
+                
+                // Create a blob URL for the animated favicon
+                const blob = new Blob([animatedSvg], {type: 'image/svg+xml'});
+                const animatedUrl = URL.createObjectURL(blob);
+                
+                // Store the animated favicon URL
+                window.animatedFaviconUrl = animatedUrl;
+                
+                // Initially set to the animated version when the page loads
+                if (document.visibilityState === 'hidden') {
+                    favicon.href = animatedUrl;
+                }
+            })
+            .catch(error => {
+                console.error('Error creating animated favicon:', error);
+            });
+    }
+    
+    // Call the function to create the animated favicon
+    createAnimatedFavicon();
+    
+    // Handle visibility changes to swap favicons
+    document.addEventListener('visibilitychange', function() {
+        if (favicon && window.animatedFaviconUrl) {
+            if (document.visibilityState === 'hidden') {
+                // Switch to animated favicon when tab is not visible
+                favicon.href = window.animatedFaviconUrl;
+            } else {
+                // Switch back to static favicon when tab is visible
+                favicon.href = faviconHref;
+            }
+        }
+    });
+});
+
+// Add theme toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Theme toggle
+    const themeToggle = document.createElement('div');
+    themeToggle.classList.add('theme-toggle');
+    themeToggle.innerHTML = `
+        <input type="checkbox" id="theme-switch" class="theme-switch">
+        <label for="theme-switch" class="theme-switch-label">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
+            <span class="slider"></span>
+        </label>
+    `;
+    
+    document.body.appendChild(themeToggle);
+    
+    const themeSwitch = document.getElementById('theme-switch');
+    
+    // Check for saved theme preference or use preferred color scheme
+    if (localStorage.getItem('theme') === 'dark' || 
+        (window.matchMedia('(prefers-color-scheme: dark)').matches && 
+         !localStorage.getItem('theme'))) {
+        document.body.classList.add('dark-theme');
+        themeSwitch.checked = true;
+    }
+    
+    // Listen for toggle changes
+    themeSwitch.addEventListener('change', function() {
+        if (this.checked) {
+            document.body.classList.add('dark-theme');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.body.classList.remove('dark-theme');
+            localStorage.setItem('theme', 'light');
+        }
+    });
+    
+    // Add scroll progress indicator
+    const progressIndicator = document.createElement('div');
+    progressIndicator.classList.add('scroll-progress');
+    document.body.appendChild(progressIndicator);
+    
+    // Update scroll progress
+    window.addEventListener('scroll', function() {
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
+        
+        progressIndicator.style.width = scrollPercentage + '%';
+    });
+    
+    // Animate sections on scroll
+    const animateSections = document.querySelectorAll('.section');
+    
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+    
+    const observer = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    animateSections.forEach(section => {
+        section.classList.add('animate-section');
+        observer.observe(section);
+    });
+    
+    // Loading animation
+    const loader = document.createElement('div');
+    loader.classList.add('page-loader');
+    loader.innerHTML = `
+        <div class="loader-content">
+            <img src="images/logo.svg" alt="Logo" class="loader-logo">
+            <div class="loader-spinner"></div>
+        </div>
+    `;
+    document.body.appendChild(loader);
+    
+    // Hide loader after page loads
+    window.addEventListener('load', function() {
+        setTimeout(() => {
+            loader.classList.add('loader-hidden');
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 1000);
+        }, 1500);
+    });
+});
+
+// Interactive Feature Showcase Tabs
+document.addEventListener('DOMContentLoaded', function() {
+    const demoTabs = document.querySelectorAll('.demo-tab');
+    
+    demoTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            // Remove active class from all tabs
+            demoTabs.forEach(t => t.classList.remove('active'));
+            
+            // Add active class to clicked tab
+            this.classList.add('active');
+            
+            // Hide all content
+            const contents = document.querySelectorAll('.demo-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Show content for clicked tab
+            const tabId = this.getAttribute('data-tab');
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+    
+    // Testimonials Slider
+    const testimonialDots = document.querySelectorAll('.testimonial-dot');
+    const testimonials = document.querySelector('.testimonials');
+    
+    testimonialDots.forEach(dot => {
+        dot.addEventListener('click', function() {
+            // Remove active class from all dots
+            testimonialDots.forEach(d => d.classList.remove('active'));
+            
+            // Add active class to clicked dot
+            this.classList.add('active');
+            
+            // Calculate position
+            const slideIndex = this.getAttribute('data-slide');
+            testimonials.style.transform = `translateX(-${slideIndex * 100}%)`;
+        });
+    });
+    
+    // Auto-advance testimonials
+    let currentSlide = 0;
+    const totalSlides = testimonialDots.length;
+    
+    function advanceSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        
+        // Update dots
+        testimonialDots.forEach(d => d.classList.remove('active'));
+        testimonialDots[currentSlide].classList.add('active');
+        
+        // Update position
+        testimonials.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+    
+    // Auto-advance every 5 seconds
+    setInterval(advanceSlide, 5000);
+    
+    // Team Member Expanded Profiles
+    const teamMembers = document.querySelectorAll('.team-member');
+    
+    // Create the modal container if it doesn't exist
+    if (!document.querySelector('.team-member-expanded')) {
+        const modalContainer = document.createElement('div');
+        modalContainer.classList.add('team-member-expanded');
+        modalContainer.innerHTML = `
+            <div class="team-member-modal">
+                <div class="modal-close"><i class="fas fa-times"></i></div>
+                <div class="team-modal-header">
+                    <img class="modal-image" src="" alt="Team Member">
+                    <div class="modal-info">
+                        <h2 class="modal-name"></h2>
+                        <div class="modal-role"></div>
+                        <div class="modal-bio"></div>
+                        <div class="skill-tags"></div>
+                    </div>
+                </div>
+                <div class="modal-contributions">
+                    <h3>Contributions</h3>
+                    <ul class="contribution-list"></ul>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modalContainer);
+        
+        // Close modal on click
+        const closeBtn = modalContainer.querySelector('.modal-close');
+        closeBtn.addEventListener('click', function() {
+            modalContainer.classList.remove('active');
+        });
+        
+        // Close modal on outside click
+        modalContainer.addEventListener('click', function(e) {
+            if (e.target === modalContainer) {
+                modalContainer.classList.remove('active');
+            }
+        });
+    }
+    
+    // Team member data
+    const teamData = {
+        "Prit Italiya": {
+            role: "Data Analyst & Software Engineer",
+            bio: "Third-year Computer Science Honours student at University of Manitoba with a passion for data analysis and software engineering.",
+            skills: ["Android Development", "UI/UX Design", "Database", "API Integration"],
+            contributions: [
+                "Led the development of financial analytics features",
+                "Designed and implemented the database schema",
+                "Created data visualization components",
+                "Implemented user authentication system"
+            ]
+        },
+        "Max Waldner": {
+            role: "Software Developer",
+            bio: "Computer Science student at University of Manitoba focused on software development and system design.",
+            skills: ["Java", "Android", "Architecture", "Testing"],
+            contributions: [
+                "Implemented core application architecture",
+                "Developed budget tracking features",
+                "Created unit tests for critical components",
+                "Designed and implemented data models"
+            ]
+        },
+        "Alanna Morris": {
+            role: "Software Developer",
+            bio: "Computer Science student at University of Manitoba specializing in application development.",
+            skills: ["UI Design", "Frontend Development", "User Testing"],
+            contributions: [
+                "Created the user interface design",
+                "Implemented responsive layouts",
+                "Conducted user testing sessions",
+                "Developed user onboarding flow"
+            ]
+        },
+        "Junior de Leone": {
+            role: "Software Developer",
+            bio: "Computer Science student at University of Manitoba with interests in software engineering.",
+            skills: ["Backend Development", "API Design", "Performance Optimization"],
+            contributions: [
+                "Built backend API endpoints",
+                "Optimized application performance",
+                "Implemented recurring transaction system",
+                "Created documentation for the codebase"
+            ]
+        },
+        "Mahas": {
+            role: "Software Developer",
+            bio: "Computer Science student at University of Manitoba focused on software development.",
+            skills: ["Android", "Testing", "Documentation"],
+            contributions: [
+                "Implemented notification system",
+                "Created system for financial goal tracking",
+                "Developed user preferences module",
+                "Wrote comprehensive test cases"
+            ]
+        }
+    };
+    
+    // Add click event to team members
+    teamMembers.forEach(member => {
+        member.addEventListener('click', function() {
+            const name = this.querySelector('h3').textContent;
+            const data = teamData[name];
+            
+            if (data) {
+                const modal = document.querySelector('.team-member-expanded');
+                const modalImage = modal.querySelector('.modal-image');
+                const modalName = modal.querySelector('.modal-name');
+                const modalRole = modal.querySelector('.modal-role');
+                const modalBio = modal.querySelector('.modal-bio');
+                const skillTags = modal.querySelector('.skill-tags');
+                const contributionList = modal.querySelector('.contribution-list');
+                
+                // Set content
+                modalImage.src = this.querySelector('img').src;
+                modalImage.alt = name;
+                modalName.textContent = name;
+                modalRole.textContent = data.role;
+                modalBio.textContent = data.bio;
+                
+                // Create skill tags
+                skillTags.innerHTML = '';
+                data.skills.forEach(skill => {
+                    const tag = document.createElement('div');
+                    tag.classList.add('skill-tag');
+                    tag.textContent = skill;
+                    skillTags.appendChild(tag);
+                });
+                
+                // Create contribution list
+                contributionList.innerHTML = '';
+                data.contributions.forEach(contribution => {
+                    const li = document.createElement('li');
+                    li.textContent = contribution;
+                    contributionList.appendChild(li);
+                });
+                
+                // Show modal
+                modal.classList.add('active');
+            }
+        });
+    });
+});
+
+// Animate timeline items when they come into view
+const animateTimeline = () => {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.2
+    });
+
+    timelineItems.forEach(item => {
+        observer.observe(item);
+    });
+};
+
+// Initialize timeline animation
+document.addEventListener('DOMContentLoaded', () => {
+    animateTimeline();
 }); 

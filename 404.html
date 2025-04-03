@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Code Kages</title>
+    <link rel="icon" type="image/svg+xml" href="images/logo.svg" id="favicon">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <img src="images/logo.svg" alt="Code Kages Logo" class="hero-logo">
+        <div class="error-code">404</div>
+        <div class="error-message">Page Not Found</div>
+        <div class="error-description">
+            Oops! It seems like we can't find the page you're looking for. The page may have been moved, deleted, or might never have existed.
+        </div>
+        <a href="index.html" class="cta-button">
+            <i class="fas fa-home"></i> Return to Homepage
+        </a>
+    </div>
+    
+    <script>
+        // Check for theme preference
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-theme');
+        }
+    </script>
+</body>
+</html> 
