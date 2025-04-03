@@ -404,17 +404,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Team member data
     const teamData = {
-        "Prit Italiya": {
-            role: "Data Analyst & Software Engineer",
-            bio: "Third-year Computer Science Honours student at University of Manitoba with a passion for data analysis and software engineering.",
-            skills: ["Android Development", "UI/UX Design", "Database", "API Integration"],
-            contributions: [
-                "Led the development of financial analytics features",
-                "Designed and implemented the database schema",
-                "Created data visualization components",
-                "Implemented user authentication system"
-            ]
-        },
         "Max Waldner": {
             role: "Software Developer",
             bio: "Computer Science student at University of Manitoba focused on software development and system design.",
@@ -435,17 +424,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 "Implemented responsive layouts",
                 "Conducted user testing sessions",
                 "Developed user onboarding flow"
-            ]
-        },
-        "Junior de Leone": {
-            role: "Software Developer",
-            bio: "Computer Science student at University of Manitoba with interests in software engineering.",
-            skills: ["Backend Development", "API Design", "Performance Optimization"],
-            contributions: [
-                "Built backend API endpoints",
-                "Optimized application performance",
-                "Implemented recurring transaction system",
-                "Created documentation for the codebase"
             ]
         },
         "Mahas": {
