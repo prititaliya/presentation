@@ -203,16 +203,12 @@
                     </div>
                     <div class="team-member">
                         <div class="member-image">
-                            <img src="images/team/mahas.jpg" alt="Mahas">
+                            <img src="images/team/mahas.png" alt="Mahas">
                         </div>
                         <h3>Mahas</h3>
                         <p class="member-role">Software Developer</p>
-                        <p class="member-bio">Computer Science student at University of Manitoba focused on software development.</p>
-                        <div class="member-links">
-                            <a href="https://github.com/" target="_blank" class="social-link">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </div>
+                        <p class="member-bio">Computer Science student at University of Manitoba.</p>
+                       
                     </div>
                 </div>
             </div>
@@ -220,13 +216,12 @@
 
         <section id="demo" class="section">
             <h2>See It In Action</h2>
-            <div class="content">
-                <div class="demo-container">
-                    <video controls>
-                        <source src="images/demo.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
+            <p class="section-intro">Watch WealthWise in action and discover how it can transform your financial management experience.</p>
+            <div class="demo-container">
+                <video id="demo-video" controls playsinline>
+                    <source src="Documents/wealth_wise_beat_2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
         </section>
 
@@ -306,73 +301,62 @@
                 
                 <div class="feature-demo">
                     <div class="demo-tabs">
-                        <div class="demo-tab active" data-tab="income-tracking">Income Tracking</div>
-                        <div class="demo-tab" data-tab="expense-tracking">Expense Tracking</div>
+                        <div class="demo-tab" data-tab="auth">Get Started</div>
+                        <div class="demo-tab active" data-tab="dashboard">Dashboard</div>
+                        <div class="demo-tab" data-tab="income-tracking">Income</div>
+                        <div class="demo-tab" data-tab="expense-tracking">Expenses</div>
                         <div class="demo-tab" data-tab="analytics">Analytics</div>
-                        <div class="demo-tab" data-tab="budgeting">Budgeting</div>
+                        <div class="demo-tab" data-tab="profile">Profile</div>
                     </div>
                     
-                    <div class="demo-content active" id="income-tracking">
-                        <h3>Income Tracking</h3>
-                        <p>WealthWise makes it easy to record and categorize your income sources. Set up recurring income entries for regular paychecks or add one-time deposits when they occur.</p>
-                        <div class="demo-image">
-                            <img src="images/demo-income.png" alt="Income Tracking Demo">
+                    <div class="demo-content" id="auth">
+                        <p class="feature-description">Start your financial journey with our seamless and secure authentication process.</p>
+                        <div class="demo-image-grid">
+                            <img src="Documents/Screen_Shots/launch.png" alt="Launch Screen">
+                            <img src="Documents/Screen_Shots/sign_up.png" alt="Sign Up">
+                            <img src="Documents/Screen_Shots/log_in.png" alt="Login">
                         </div>
-                        <div class="demo-features">
-                            <ul>
-                                <li>Multiple income categories</li>
-                                <li>Recurring income tracking</li>
-                                <li>Income history visualization</li>
-                                <li>Tax category assignment</li>
-                            </ul>
+                    </div>
+                    
+                    <div class="demo-content active" id="dashboard">
+                        <p class="feature-description">Your personalized financial command center - instantly view balances, track transactions, and access key features.</p>
+                        <div class="demo-image">
+                            <img src="Documents/Screen_Shots/home_dashboard.png" alt="Home Dashboard">
+                        </div>
+                    </div>
+                    
+                    <div class="demo-content" id="income-tracking">
+                        <p class="feature-description">Smart income management with detailed tracking, categorization, and comprehensive history views.</p>
+                        <div class="demo-image-grid">
+                            <img src="Documents/Screen_Shots/add_income.png" alt="Add Income">
+                            <img src="Documents/Screen_Shots/income_history.png" alt="Income History">
+                            <img src="Documents/Screen_Shots/income_tracking.png" alt="Income Tracking">
                         </div>
                     </div>
                     
                     <div class="demo-content" id="expense-tracking">
-                        <h3>Expense Tracking</h3>
-                        <p>Track all your expenses with detailed categorization. Easily add expenses on the go and see where your money is going at a glance.</p>
-                        <div class="demo-image">
-                            <img src="images/demo-expenses.png" alt="Expense Tracking Demo">
-                        </div>
-                        <div class="demo-features">
-                            <ul>
-                                <li>Multiple expense categories</li>
-                                <li>Recurring expense setup</li>
-                                <li>Receipt photo storage</li>
-                                <li>Location-based expense tracking</li>
-                            </ul>
+                        <p class="feature-description">Effortlessly monitor your spending with intuitive expense logging and detailed transaction insights.</p>
+                        <div class="demo-image-grid">
+                            <img src="Documents/Screen_Shots/add_expense.png" alt="Add Expense">
+                            <img src="Documents/Screen_Shots/expense_history.png" alt="Expense History">
+                            <img src="Documents/Screen_Shots/expense_tracking.png" alt="Expense Tracking">
                         </div>
                     </div>
                     
                     <div class="demo-content" id="analytics">
-                        <h3>Financial Analytics</h3>
-                        <p>Gain insights into your financial habits with comprehensive analytics. Visualize spending patterns and identify areas for improvement.</p>
-                        <div class="demo-image">
-                            <img src="images/demo-analytics.png" alt="Analytics Demo">
-                        </div>
-                        <div class="demo-features">
-                            <ul>
-                                <li>Spending breakdown by category</li>
-                                <li>Monthly/yearly comparison</li>
-                                <li>Income vs. expense analysis</li>
-                                <li>Trend visualization</li>
-                            </ul>
+                        <p class="feature-description">Transform your financial data into actionable insights with powerful visual analytics and reports.</p>
+                        <div class="demo-image-grid">
+                            <img src="Documents/Screen_Shots/income_analytics_monthly.png" alt="Monthly Income Analytics">
+                            <img src="Documents/Screen_Shots/expense_analytics_monthly.png" alt="Monthly Expense Analytics">
+                            <img src="Documents/Screen_Shots/summary_analytics_monthly.png" alt="Monthly Summary Analytics">
                         </div>
                     </div>
                     
-                    <div class="demo-content" id="budgeting">
-                        <h3>Budget Planning</h3>
-                        <p>Set financial goals and track your progress with our budgeting tools. Create category-specific budgets and get alerts when you're approaching limits.</p>
-                        <div class="demo-image">
-                            <img src="images/demo-budget.png" alt="Budgeting Demo">
-                        </div>
-                        <div class="demo-features">
-                            <ul>
-                                <li>Custom budget creation</li>
-                                <li>Budget vs. actual comparison</li>
-                                <li>Goal setting and tracking</li>
-                                <li>Budget alerts and notifications</li>
-                            </ul>
+                    <div class="demo-content" id="profile">
+                        <p class="feature-description">Customize your experience with easy-to-use profile management and secure account settings.</p>
+                        <div class="demo-image-grid">
+                            <img src="Documents/Screen_Shots/profile_dashboard.png" alt="Profile Dashboard">
+                            <img src="Documents/Screen_Shots/edit_profile.png" alt="Edit Profile">
                         </div>
                     </div>
                 </div>

@@ -471,4 +471,40 @@ const animateTimeline = () => {
 // Initialize timeline animation
 document.addEventListener('DOMContentLoaded', () => {
     animateTimeline();
+});
+
+// Video autoplay when in view
+document.addEventListener('DOMContentLoaded', function() {
+    const video = document.getElementById('demo-video');
+    
+    // Create an Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            // If video is in view
+            if (entry.isIntersecting) {
+                // Play video if it's paused
+                if (video.paused) {
+                    video.play().catch(e => console.log("Autoplay prevented:", e));
+                }
+            } else {
+                // Pause video if it's playing
+                if (!video.paused) {
+                    video.pause();
+                }
+            }
+        });
+    }, {
+        // Configure the observer
+        threshold: 0.5 // Trigger when 50% of the video is visible
+    });
+
+    // Start observing the video element
+    observer.observe(video);
+
+    // Add event listener for when user leaves the page
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden && !video.paused) {
+            video.pause();
+        }
+    });
 }); 
