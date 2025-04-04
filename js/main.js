@@ -473,70 +473,45 @@ document.addEventListener('DOMContentLoaded', () => {
     animateTimeline();
 });
 
-// Video autoplay functionality
-document.addEventListener('DOMContentLoaded', () => {
+// Video autoplay when in view
+document.addEventListener('DOMContentLoaded', function() {
     const video = document.getElementById('demo-video');
-    if (!video) return;
+    let isVideoPlaying = false;
 
-    // Set initial state
-    video.volume = 1.0;
-    video.muted = false;
-    video.preload = 'auto';
-
-    // Create a single observer for the video
-    const videoObserver = new IntersectionObserver((entries) => {
-        const entry = entries[0];
-        if (entry.isIntersecting) {
-            // Try to play the video when it's visible
-            const playPromise = video.play();
-            if (playPromise !== undefined) {
-                playPromise
+    // Create an Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            // When video comes into view
+            if (entry.isIntersecting && !isVideoPlaying) {
+                video.play()
                     .then(() => {
-                        // Playback started successfully
-                        video.muted = false;
-                        video.volume = 1.0;
+                        isVideoPlaying = true;
+                        video.muted = false; // Unmute when successfully started playing
                     })
                     .catch(error => {
-                        console.log("Autoplay prevented:", error);
-                        // Add a one-time click handler to the document
-                        const clickHandler = () => {
-                            video.play()
-                                .then(() => {
-                                    video.muted = false;
-                                    video.volume = 1.0;
-                                })
-                                .catch(e => console.log("Play after click prevented:", e));
-                            document.removeEventListener('click', clickHandler);
-                        };
-                        document.addEventListener('click', clickHandler);
+                        console.log("Autoplay failed:", error);
+                        // If autoplay fails, we'll keep it muted and try again
+                        video.muted = true;
+                        video.play().then(() => {
+                            isVideoPlaying = true;
+                        });
                     });
-            }
-        } else {
-            // Pause the video when it's not visible
-            if (!video.paused) {
+            } else if (!entry.isIntersecting && isVideoPlaying) {
                 video.pause();
+                isVideoPlaying = false;
             }
-        }
+        });
     }, {
-        threshold: 0.5
+        threshold: 0.5 // Video will play when 50% visible
     });
 
-    // Start observing the video
-    videoObserver.observe(video);
+    // Start observing the video element
+    observer.observe(video);
 
-    // Handle tab visibility
-    document.addEventListener('visibilitychange', () => {
-        if (document.hidden && !video.paused) {
-            video.pause();
-        } else if (!document.hidden && 
-                   video.getBoundingClientRect().top < window.innerHeight &&
-                   video.getBoundingClientRect().bottom > 0) {
-            video.play()
-                .then(() => {
-                    video.muted = false;
-                    video.volume = 1.0;
-                })
-                .catch(e => console.log("Resume prevented:", e));
+    // Handle user interaction to unmute if needed
+    video.addEventListener('click', function() {
+        if (video.muted) {
+            video.muted = false;
         }
     });
 });
@@ -547,8 +522,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const slides = Array.from(document.querySelectorAll('.slide'));
     const prevButton = document.querySelector('.prev-btn');
     const nextButton = document.querySelector('.next-btn');
+    const sliderWrapper = document.querySelector('.slider-wrapper');
     
     let currentIndex = 0;
+    let interval;
     const slideWidth = 100; // 100%
 
     function updateSlider() {
@@ -566,16 +543,66 @@ document.addEventListener('DOMContentLoaded', function() {
         updateSlider();
     }
 
+    function startAutoplay() {
+        if (!interval && document.visibilityState === 'visible' && document.hasFocus()) {
+            interval = setInterval(() => {
+                goToSlide(currentIndex + 1);
+            }, 5000);
+        }
+    }
+
+    function stopAutoplay() {
+        if (interval) {
+            clearInterval(interval);
+            interval = null;
+        }
+    }
+
+    // Intersection Observer to handle visibility
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && document.visibilityState === 'visible' && document.hasFocus()) {
+                startAutoplay();
+            } else {
+                stopAutoplay();
+            }
+        });
+    }, { threshold: 0.5 }); // At least 50% of the slider should be visible
+
+    observer.observe(sliderWrapper);
+
+    // Event Listeners
     prevButton.addEventListener('click', () => {
         goToSlide(currentIndex - 1);
+        stopAutoplay();
+        startAutoplay();
     });
 
     nextButton.addEventListener('click', () => {
         goToSlide(currentIndex + 1);
+        stopAutoplay();
+        startAutoplay();
     });
 
-    // Optional: Auto-advance every 5 seconds
-    setInterval(() => {
-        goToSlide(currentIndex + 1);
-    }, 5000);
+    // Pause on hover
+    sliderWrapper.addEventListener('mouseenter', stopAutoplay);
+    sliderWrapper.addEventListener('mouseleave', startAutoplay);
+
+    // Stop on tab change or window blur
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') {
+            stopAutoplay();
+        } else if (document.visibilityState === 'visible' && document.hasFocus()) {
+            startAutoplay();
+        }
+    });
+
+    // Stop on window blur
+    window.addEventListener('blur', stopAutoplay);
+    window.addEventListener('focus', startAutoplay);
+
+    // Initial start only if visible and focused
+    if (document.visibilityState === 'visible' && document.hasFocus()) {
+        startAutoplay();
+    }
 }); 
