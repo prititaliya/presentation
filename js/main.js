@@ -473,30 +473,70 @@ document.addEventListener('DOMContentLoaded', () => {
     animateTimeline();
 });
 
-// Video autoplay when in view
-const video = document.getElementById('demo-video');
-if (video) {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Try to play video with sound
-                video.play().catch(e => {
-                    console.log("Autoplay prevented:", e);
-                    // Don't mute the video if autoplay is prevented
-                    // Let the user control the sound
-                });
-            } else {
+// Video autoplay functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const video = document.getElementById('demo-video');
+    if (!video) return;
+
+    // Set initial state
+    video.volume = 1.0;
+    video.muted = false;
+    video.preload = 'auto';
+
+    // Create a single observer for the video
+    const videoObserver = new IntersectionObserver((entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+            // Try to play the video when it's visible
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise
+                    .then(() => {
+                        // Playback started successfully
+                        video.muted = false;
+                        video.volume = 1.0;
+                    })
+                    .catch(error => {
+                        console.log("Autoplay prevented:", error);
+                        // Add a one-time click handler to the document
+                        const clickHandler = () => {
+                            video.play()
+                                .then(() => {
+                                    video.muted = false;
+                                    video.volume = 1.0;
+                                })
+                                .catch(e => console.log("Play after click prevented:", e));
+                            document.removeEventListener('click', clickHandler);
+                        };
+                        document.addEventListener('click', clickHandler);
+                    });
+            }
+        } else {
+            // Pause the video when it's not visible
+            if (!video.paused) {
                 video.pause();
             }
-        });
-    }, { threshold: 0.5 });
+        }
+    }, {
+        threshold: 0.5
+    });
 
-    observer.observe(video);
+    // Start observing the video
+    videoObserver.observe(video);
 
-    // Pause video when tab loses focus
+    // Handle tab visibility
     document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
+        if (document.hidden && !video.paused) {
             video.pause();
+        } else if (!document.hidden && 
+                   video.getBoundingClientRect().top < window.innerHeight &&
+                   video.getBoundingClientRect().bottom > 0) {
+            video.play()
+                .then(() => {
+                    video.muted = false;
+                    video.volume = 1.0;
+                })
+                .catch(e => console.log("Resume prevented:", e));
         }
     });
-} 
+}); 
