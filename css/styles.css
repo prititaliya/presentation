@@ -1962,4 +1962,31 @@ img {
     .skill-tags {
         justify-content: center;
     }
+}
+
+.member-contributions {
+    margin: 1rem 0;
+    text-align: left;
+    padding: 0 1rem;
+}
+
+.member-contributions ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.member-contributions li {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    padding-left: 1.2rem;
+    position: relative;
+}
+
+.member-contributions li:before {
+    content: "•";
+    color: var(--accent-color);
+    position: absolute;
+    left: 0;
 } 

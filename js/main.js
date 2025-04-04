@@ -402,31 +402,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Team member data
-    const teamData = {
-        "Max Waldner": {
-            role: "Software Developer",
-            bio: "Computer Science student at University of Manitoba focused on software development and system design.",
-            skills: ["Java", "Android", "Architecture", "Testing"],
-            contributions: [
-                "Implemented core application architecture",
-                "Developed budget tracking features",
-                "Created unit tests for critical components",
-                "Designed and implemented data models"
-            ]
-        },
-        "Mahas": {
-            role: "Software Developer",
-            bio: "Computer Science student at University of Manitoba focused on software development.",
-            skills: ["Android", "Testing", "Documentation"],
-            contributions: [
-                "Implemented notification system",
-                "Created system for financial goal tracking",
-                "Developed user preferences module",
-                "Wrote comprehensive test cases"
-            ]
-        }
-    };
     
     // Add click event to team members
     teamMembers.forEach(member => {

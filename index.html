@@ -161,15 +161,15 @@
                             </a>
                         </div>
                     </div>
-                    <div class="team-member">
+                    <div class="team-member" onclick="openModal('max-modal')">
                         <div class="member-image">
-                            <img src="images/team/max.jpg" alt="Max Waldner">
+                            <img src="images/team/max.png" alt="Max Waldner">
                         </div>
                         <h3>Max Waldner</h3>
                         <p class="member-role">Software Developer</p>
                         <p class="member-bio">Computer Science student at University of Manitoba focused on software development and system design.</p>
                         <div class="member-links">
-                            <a href="https://github.com/" target="_blank" class="social-link">
+                            <a href="https://github.com/Sue-Doe" target="_blank" class="social-link">
                                 <i class="fab fa-github"></i>
                             </a>
                         </div>
@@ -497,6 +497,38 @@
                         <li>Refactored code in the presentation and business layers after feedback cycles to better uphold SOLID principles</li>
                         <li>Performed project organizational tasks using GitLab, Google Drive, and maintained project logs</li>
                         <li>Reviewed and updated acceptance tests; added fixes for different aspect ratios</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Max's modal -->
+    <div id="max-modal" class="member-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('max-modal')">&times;</span>
+            <div class="modal-header">
+                <img src="images/team/max.png" alt="Max Waldner">
+                <h2>Max Waldner</h2>
+                <p>Software Developer</p>
+            </div>
+            <div class="modal-body">
+                <div class="skills-section">
+                    <h3>Skills & Expertise</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Android</span>
+                        <span class="skill-tag">Architecture</span>
+                        <span class="skill-tag">Testing</span>
+                    </div>
+                </div>
+                <div class="contributions-section">
+                    <h3>Project Contributions</h3>
+                    <ul class="contribution-list">
+                        <li>Implemented core application architecture</li>
+                        <li>Developed budget tracking features</li>
+                        <li>Created unit tests for critical components</li>
+                        <li>Designed and implemented comprehensive data models and database architecture</li>
                     </ul>
                 </div>
             </div>
