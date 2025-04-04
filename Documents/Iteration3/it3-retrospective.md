@@ -55,7 +55,7 @@ We will evaluate our improvements using quantitative and qualitative measures:
 
 ### Performance Tracking
 
-![Sprint Velocity Comparison](https://code.cs.umanitoba.ca/comp3350-winter2025/a01-g11-code-kages/-/blob/main/Documents/Iteration3/velocity_chart.png)
+![Sprint Velocity Comparison](Documents/Iteration3/velocity_chart.png)
 *Work completed across previous two iterations*
 
 ### Reflection and Outlook

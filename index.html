@@ -202,14 +202,13 @@
                             </a>
                         </div>
                     </div>
-                    <div class="team-member">
+                    <div class="team-member" onclick="openModal('mahas-modal')">
                         <div class="member-image">
                             <img src="images/team/mahas.png" alt="Mahas">
                         </div>
                         <h3>Mahas</h3>
                         <p class="member-role">Software Developer</p>
                         <p class="member-bio">Computer Science student at University of Manitoba.</p>
-                       
                     </div>
                 </div>
             </div>
@@ -419,7 +418,7 @@
                         <h3>Project Planning</h3>
                         <ul>
                             <li><a href="markdown-viewer.html?file=Documents/Iteration0/Iteration0DRAFT.md" target="_blank">Initial Project Plan</a></li>
-                            <li><a href="markdown-viewer.html?file=Documents/Iteration0/branchStrat.md" target="_blank">Branch Strategy</a></li>
+                            <li><a href="markdown-viewer.html?file=Documents/Iteration2/new_branching_strategy.md" target="_blank">Branch Strategy</a></li>
                         </ul>
                     </div>
                     <div class="resource-card">
@@ -567,6 +566,36 @@
                         <li>Developed budget tracking features</li>
                         <li>Created unit tests for critical components</li>
                         <li>Designed and implemented comprehensive data models and database architecture</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Mahas's modal -->
+    <div id="mahas-modal" class="member-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('mahas-modal')">&times;</span>
+            <div class="modal-header">
+                <img src="images/team/mahas.png" alt="Mahas">
+                <h2>Mahas</h2>
+                <p>Software Developer</p>
+            </div>
+            <div class="modal-body">
+                <div class="skills-section">
+                    <h3>Skills & Expertise</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Android</span>
+                        <span class="skill-tag">Testing</span>
+                        <span class="skill-tag">Project Planning</span>
+                    </div>
+                </div>
+                <div class="contributions-section">
+                    <h3>Project Contributions</h3>
+                    <ul class="contribution-list">
+                        <li>Developed unit tests to ensure software quality</li>
+                        <li>Contributed ideas and solutions during project planning</li>
                     </ul>
                 </div>
             </div>

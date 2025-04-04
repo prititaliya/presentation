@@ -73,50 +73,19 @@
 - `Dev#025_CreateLoginActivity`
 - `Test#008_LoginTesting`
 
+## Visual Representation
+
+
+### Color Legend:
+- Main Branch (Dark Gray)
+- Develop Branch (Purple)
+- Feature Branches (Light Yellow)
+- Story Branches (Light Blue)
+- Dev Branches (Light Green)
+- Test Branches (Yellow)
+- Bug Branches (Brown)
+- Technical Debt Branches (Pink)
 
 # Git Branching Strategy
 
-```mermaid
-%%{init: { 'theme': 'neutral', 'themeVariables': { 'fontSize': '16px', 'fontFamily': 'arial' } } }%%
-graph TD
-  %% Add blank node for spacing
-   title[Git Branching Strategy]
-   style title fill:none,stroke:none
-   title --> main
-   
-   main --> develop
-   develop --> Feature#001_FeatureName
-   develop --> TechDebt#001_TechDebtName
-   
-   Feature#001_FeatureName --> Story#001_StoryName
-   Feature#001_FeatureName --> Story#002_StoryName
-   
-   Story#001_StoryName --> Dev#001_DevName
-   Story#001_StoryName --> Dev#002_DevName
-   Story#001_StoryName --> Test#001_TestName
-   Story#001_StoryName --> Bug#001_BugName
-   
-   Story#002_StoryName --> Dev#003_DevName
-   Story#002_StoryName --> Dev#004_DevName
-   Story#002_StoryName --> Test#002_TestName
-   Story#002_StoryName --> Bug#002_BugName
-   
-   classDef main fill:#333,stroke:#333,stroke-width:4px,color:white;
-   classDef develop fill:#cc84f4,stroke:#cc84f4,stroke-width:2px,color:black;
-   classDef feature fill:#fffae1,stroke:#fffae1,stroke-width:2px,color:black;
-   classDef story fill:#81f1f7,stroke:#81f1f7,stroke-width:2px,color:black;
-   classDef dev fill:#9dffb0,stroke:#9dffb0,stroke-width:2px,color:black;
-   classDef test fill:#fff563,stroke:#fff563,stroke-width:2px,color:black;
-   classDef bug fill:#c48d3f,stroke:#c48d3f,stroke-width:2px,color:black;
-   classDef techDebt fill:#Fb78c1,stroke:#fb78c1,stroke-width:2px,color:black;
-   classDef titleClass fill:none,stroke:none,color:#333,font-size:20px,font-weight:bold;
-   
-   class main main;
-   class develop develop;
-   class Feature#001_FeatureName,Feature#002_FeatureName feature;
-   class Story#001_StoryName,Story#002_StoryName story;
-   class Dev#001_DevName,Dev#002_DevName,Dev#003_DevName,Dev#004_DevName dev;
-   class Test#001_TestName,Test#002_TestName test;
-   class Bug#001_BugName,Bug#002_BugName bug;
-   class TechDebt#001_TechDebtName techDebt;
-   class title titleClass;
+![Git Branching Strategy](Documents/Iteration2/branch_strategy.png)
