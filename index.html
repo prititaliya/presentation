@@ -23,13 +23,14 @@
             <a href="#demo">Demo</a>
             <a href="#journey">Journey</a>
             <a href="#feature-showcase">Showcase</a>
+            <a href="#postmortem">Insights</a>
             <a href="#resources">Resources</a>
         </div>
     </nav>
 
     <header class="hero">
         <img src="images/logo.svg" alt="Code Kages Logo" class="hero-logo">
-        <h1>wealth wise</h1>
+        <h1>Wealth Wise</h1>
         <p>Wealth Management System</p>
         <div class="hero-cta">
             <a href="#demo" class="cta-button">Watch the Demo</a>
@@ -41,7 +42,7 @@
         <section id="overview" class="section">
             <h2>Overview</h2>
             <div class="content">
-                <p class="section-intro">wealth wise is an Android-based Wealth Management System developed over multiple iterations, focusing on helping users track and manage their financial activities efficiently. The project evolved through careful planning and iterative development.</p>
+                <p class="section-intro">Wealth Wise is an Android-based Wealth Management System developed over multiple iterations, focusing on helping users track and manage their financial activities efficiently. The project evolved through careful planning and iterative development.</p>
                 <div class="overview-grid">
                     <div class="overview-item">
                         <i class="fas fa-code-branch"></i>
@@ -216,7 +217,7 @@
 
         <section id="demo" class="section">
             <h2>See It In Action</h2>
-            <p class="section-intro">Watch wealth wise in action and discover how it can transform your financial management experience.</p>
+            <p class="section-intro">Watch Wealth Wise in action and discover how it can transform your financial management experience.</p>
             <div class="demo-container">
                 <video id="demo-video" controls playsinline preload="auto">
                     <source src="Documents/wealth_wise_beat_2.mp4" type="video/mp4">
@@ -297,7 +298,7 @@
         <section id="feature-showcase" class="section">
             <h2>Interactive Feature Showcase</h2>
             <div class="content">
-                <p class="section-intro">Experience the key features of our wealth wise application through this interactive showcase. See how the app helps users manage their finances effectively.</p>
+                <p class="section-intro">Experience the key features of our Wealth Wise application through this interactive showcase. See how the app helps users manage their finances effectively.</p>
                 
                 <div class="feature-demo">
                     <div class="demo-tabs">
@@ -363,7 +364,53 @@
             </div>
         </section>
         
-        <section id="resources" class="section">
+   
+
+        <section id="postmortem" class="section">
+            <h2>Development Process Insights</h2>
+            <div class="content">
+                <div class="slider-wrapper">
+                    <div class="slider-track">
+                        <div class="slide">
+                            <div class="postmortem-card success">
+                                <h3>
+                                    <i class="fas fa-check-circle"></i>
+                                    What Went Right
+                                </h3>
+                                <p>From iteration 2 and onward of the development process we noticed a shift from most things going wrong to most things going right. We were able to collaborate and communicate effectively. While each of us integrated our own individual user stories, we expressed concerns and trouble we all faced in our individual codebase to the group and got offered a helping hand. This resulted in very few merge conflicts that were relatively easy to resolve making the collaboration as easy as we could. We also found that having meaningful commits proved to be helpful when it came to debugging later on. Additionally, structuring our code with a proper three tier architecture allowed us to easily add in new features and left us with a clean codebase that was easy to read and add code to. Through this process, we learned the importance of SOLID principles and how to write more maintainable code.</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <div class="postmortem-card warning">
+                                <h3>
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    What Went Wrong
+                                </h3>
+                                <p>We started off very ambitious to start the project and just coded as fast as we could without putting in enough effort into minimizing tech debt and setting up the proper architecture. This resulted in us having a lot of trouble early on. We had a wakeup call when it came to our feedback in Iteration 1 and spent a significant time catching up on all the tech debt that we created. We spent countless hours fixing our codebase but it ultimately streamlined the project ever since. We also did not follow our branching strategy in the beginning properly which caused a lot of trouble when we needed to revert a commit. Later on, we implemented the strategy correctly and learned the importance of organized branching—it made collaboration much smoother and prevented setbacks. Also the database implementation was hard at the time and we spent hours trying to integrate it into our app and we had a lot of resulting bugs that sometimes stopped development altogether for hours as we searched for it. Overall we had a few major issues but as a team we managed to get through it and deliver an app we were all proud of.</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <div class="postmortem-card time">
+                                <h3>
+                                    <i class="fas fa-clock"></i>
+                                    What Took The Most Time
+                                </h3>
+                                <p>We were excited to add a real database to our app, so we started early thinking the task would not be so hard. We soon found out that starting early was the best decision we made for the entire app because nothing was going right. We first started off trying to implement the HSQLDB suggested in class and the sample project but we could not make it work. We had constant errors and the database would not connect. We had trouble understanding the script file and a lot of the SQL syntax we were used to did not work. We tried to switch to SQLITE but soon found out it would not work for our purposes of the app so we had no other option than to make HSQLDB work. After hours and hours we found that our problem was our version of HSQLDB. We switched to the appropriate version and after about 8-12 hours of integration time we finally had a working database.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider-controls">
+                        <button class="prev-btn" aria-label="Previous slide">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="next-btn" aria-label="Next slide">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+             <section id="resources" class="section">
             <h2>Project Documentation</h2>
             <div class="content">
                 <div class="resources-grid">
@@ -394,7 +441,7 @@
                         <i class="fas fa-download"></i>
                         <h3>Application</h3>
                         <ul>
-                            <li><a href="Documents/app-debug.apk" download>Download wealth wise APK</a></li>
+                            <li><a href="Documents/app-debug.apk" download>Download Wealth Wise APK</a></li>
                         </ul>
                     </div>
                 </div>

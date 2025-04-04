@@ -1147,39 +1147,91 @@ body {
 
 /* Postmortem Grid */
 .postmortem-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 2rem;
-    padding: 1rem;
+    max-width: 900px;
+    margin: 2rem auto;
 }
 
 .postmortem-card {
-    background: var(--card-bg);
-    padding: 2.5rem;
-    border-radius: 18px;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px var(--shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .postmortem-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 25px var(--shadow-color);
 }
 
-.postmortem-card h3 {
-    color: var(--text-color);
+.postmortem-card .card-header {
+    display: flex;
+    align-items: center;
     margin-bottom: 1.5rem;
-    font-size: 24px;
-    font-weight: 600;
+    gap: 1rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 1rem;
 }
 
-.postmortem-card ul {
-    list-style: none;
+.postmortem-card .card-header i {
+    font-size: 2rem;
 }
 
-.postmortem-card ul li {
-    color: var(--text-muted);
-    margin-bottom: 1rem;
-    font-size: 17px;
-    line-height: 1.5;
+.postmortem-card.success .card-header i {
+    color: var(--success-color, #28a745);
+}
+
+.postmortem-card.challenges .card-header i {
+    color: var(--warning-color, #ffc107);
+}
+
+.postmortem-card.lessons .card-header i {
+    color: var(--info-color, #17a2b8);
+}
+
+.postmortem-card .card-header h3 {
+    margin: 0;
+    font-size: 1.75rem;
+    color: var(--heading-color);
+}
+
+.postmortem-card .card-content p {
+    color: var(--text-color);
+    line-height: 1.8;
+    font-size: 1.1rem;
+    margin: 0;
+    padding: 0 1rem;
+    text-align: justify;
+}
+
+@media (max-width: 768px) {
+    .postmortem-grid {
+        padding: 0 1rem;
+    }
+
+    .postmortem-card {
+        padding: 1.5rem;
+    }
+
+    .postmortem-card .card-header {
+        margin-bottom: 1rem;
+    }
+
+    .postmortem-card .card-header i {
+        font-size: 1.5rem;
+    }
+
+    .postmortem-card .card-header h3 {
+        font-size: 1.25rem;
+    }
+
+    .postmortem-card .card-content p {
+        font-size: 1rem;
+        padding: 0;
+    }
 }
 
 /* Overview Grid */
@@ -2193,5 +2245,154 @@ img {
     .timeline-item.visible {
         opacity: 1;
         transform: translateX(0);
+    }
+}
+
+.curved-slider {
+    position: relative;
+    background: linear-gradient(135deg, #2997ff10 0%, #fce4ec50 100%);
+    padding: 4rem 0;
+    margin: 2rem -2rem;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.curved-slider::before,
+.curved-slider::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background-color: var(--bg-color);
+}
+
+.curved-slider::before {
+    top: 0;
+    border-radius: 0 0 50% 50%;
+}
+
+.curved-slider::after {
+    bottom: 0;
+    border-radius: 50% 50% 0 0;
+}
+
+.slider-wrapper {
+    position: relative;
+    max-width: 1800px;
+    margin: 2rem auto;
+    overflow: hidden;
+}
+
+.slider-track {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slide {
+    flex: 0 0 100%;
+    padding: 2rem;
+}
+
+.postmortem-card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 3rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.postmortem-card h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.postmortem-card h3 i {
+    font-size: 2rem;
+}
+
+.postmortem-card.success h3 i {
+    color: #28a745;
+}
+
+.postmortem-card.warning h3 i {
+    color: #ffc107;
+}
+
+.postmortem-card.time h3 i {
+    color: #17a2b8;
+}
+
+.postmortem-card p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+.slider-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+    pointer-events: none;
+}
+
+.prev-btn, .next-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+    transition: transform 0.3s ease;
+    padding: 1rem;
+}
+
+.prev-btn:hover, .next-btn:hover {
+    transform: scale(1.2);
+    color: var(--accent-color);
+}
+
+.prev-btn i, .next-btn i {
+    font-size: 2.5rem;
+}
+
+@media (max-width: 768px) {
+    .slide {
+        padding: 1rem;
+    }
+    
+    .postmortem-card {
+        padding: 2rem;
+    }
+    
+    .postmortem-card h3 {
+        font-size: 1.5rem;
+    }
+    
+    .postmortem-card h3 i {
+        font-size: 1.5rem;
+    }
+    
+    .postmortem-card p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+    
+    .prev-btn i, .next-btn i {
+        font-size: 2rem;
     }
 } 
