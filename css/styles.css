@@ -346,25 +346,24 @@
 
 .demo-image-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1rem;
-    margin: 0;
-    max-width: 800px;
-    margin: 0 auto;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 1rem auto;
+    max-width: 1200px;
 }
 
 .demo-image-grid img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: 300px;
+    object-fit: contain;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease;
+    background-color: var(--card-bg);
 }
 
 .demo-image-grid img:hover {
     transform: scale(1.02);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 768px) {
@@ -382,8 +381,12 @@
     }
 
     .demo-image-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 0.5rem;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .demo-image-grid img {
+        height: 200px;
     }
 
     .feature-description {
@@ -1287,6 +1290,15 @@ footer {
 }
 
 @media (max-width: 768px) {
+    #journey {
+        display: none;
+    }
+    
+    /* Hide journey link in mobile nav */
+    .nav-links a[href="#journey"] {
+        display: none;
+    }
+    
     .mobile-menu-button {
         display: block;
     }
@@ -2151,5 +2163,35 @@ img {
         font-size: 0.9rem;
         margin: 0.5rem 1rem 1.25rem;
         padding: 0.6rem 1rem;
+    }
+}
+
+/* Journey section visibility */
+@media (max-width: 768px) {
+    #journey {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) {
+    #journey {
+        display: block;
+    }
+    
+    .timeline {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .timeline-item {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: all 0.6s ease;
+    }
+
+    .timeline-item.visible {
+        opacity: 1;
+        transform: translateX(0);
     }
 } 

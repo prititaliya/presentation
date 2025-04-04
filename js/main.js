@@ -474,37 +474,29 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Video autoplay when in view
-document.addEventListener('DOMContentLoaded', function() {
-    const video = document.getElementById('demo-video');
-    
-    // Create an Intersection Observer
+const video = document.getElementById('demo-video');
+if (video) {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            // If video is in view
             if (entry.isIntersecting) {
-                // Play video if it's paused
-                if (video.paused) {
-                    video.play().catch(e => console.log("Autoplay prevented:", e));
-                }
+                // Try to play video with sound
+                video.play().catch(e => {
+                    console.log("Autoplay prevented:", e);
+                    // Don't mute the video if autoplay is prevented
+                    // Let the user control the sound
+                });
             } else {
-                // Pause video if it's playing
-                if (!video.paused) {
-                    video.pause();
-                }
+                video.pause();
             }
         });
-    }, {
-        // Configure the observer
-        threshold: 0.5 // Trigger when 50% of the video is visible
-    });
+    }, { threshold: 0.5 });
 
-    // Start observing the video element
     observer.observe(video);
 
-    // Add event listener for when user leaves the page
+    // Pause video when tab loses focus
     document.addEventListener('visibilitychange', () => {
-        if (document.hidden && !video.paused) {
+        if (document.hidden) {
             video.pause();
         }
     });
-}); 
+} 
